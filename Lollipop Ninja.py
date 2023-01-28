@@ -435,8 +435,9 @@ r_trigger = 0
 ambience_sound.play(-1)
 slide_channel.play(slide_sound,-1)
 music.play(-1)
+run = True
 # Loop ------------------------------------------------------- #
-while True:
+while run:
     # Background --------------------------------------------- #
     Display.fill(SKY)
 
