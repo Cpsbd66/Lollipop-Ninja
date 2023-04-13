@@ -19,7 +19,7 @@ pygame.joystick.init()
 joystick_count = pygame.joystick.get_count()
 if joystick_count > 0:
     controller_mode = True
-if controller_mode == True:
+if controller_mode is True:
     for i in range(joystick_count):
         joystick = pygame.joystick.Joystick(i)
         joystick.init()
@@ -197,7 +197,7 @@ def Text2List(Text,Divider,intmode=False):
         if char != Divider:
             Current += char
         else:
-            if intmode == True:
+            if intmode is True:
                 try:
                     List.append(int(Current))
                 except:
@@ -313,7 +313,7 @@ clouds = gen_clouds(edges)
 void = edges[3]+32
 current_level = 1
 # Controller Setup ------------------------------------------- #
-if controller_mode == True:
+if controller_mode is True:
     img_1 = load_img('data/images/controller_setup/controller_0.png')
     img_2 = load_img('data/images/controller_setup/controller_1.png')
     img_3 = load_img('data/images/controller_setup/controller_2.png')
@@ -418,7 +418,7 @@ jump_name = 'UP'
 arrow_keys_name = 'arrow keys'
 x_name = 'X'
 c_name = 'C'
-if controller_mode == True:
+if controller_mode is True:
     jump_name = 'A'
     arrow_keys_name = 'left stick'
     x_name = 'left bumper'
@@ -509,17 +509,17 @@ while run:
             for r in invisible_areas:
                 if r.colliderect(itemR):
                     can_see = False
-                    if item[5] == True:
+                    if item[5] is True:
                         VOs[random.choice(['huh_1','huh_2','I_cant_see_him','umm','what','where_did_he_go'])].play()
                         expressions.append(['confusion',item[1]+11,item[2],400])
                     item[5] = False
-            if can_see == True:
+            if can_see is True:
                 item[5] = True
-            if can_see == True:
-                if ninja_visible == True:
-                    if line_collide([item[1],item[2]], [ninja.x,ninja.y], level) == False:
+            if can_see is True:
+                if ninja_visible is True:
+                    if line_collide([item[1],item[2]], [ninja.x,ninja.y], level) is False:
                         stared_at = True
-                        if item[4] == False:
+                        if item[4] is False:
                             item[4] = True
                             VOs[random.choice(['huh_1','huh_2','hey','umm','stop','what_are_you_doing'])].play()
                             expressions.append(['shock',item[1]+14,item[2],400])
@@ -538,7 +538,7 @@ while run:
                     
     invisible_areas = []
     
-    if stared_at == True:
+    if stared_at is True:
         health -= 2
         if health < 150:
             health = 150
@@ -559,12 +559,12 @@ while run:
         VOs[random.choice(['hehe','you_cant_see_me','Im_gone'])].play()
     # Ninja -------------------------------------------------- #
     if wait_to_jump != 0:
-        if air == False:
+        if air is False:
             ninja_gravity = -4
             wait_to_jump = 0
             jump_sound.play()
             particle_animations.append([jump_animation.start(ninja.x,ninja.y-1),jump_animation,False])
-        elif wall == True:
+        elif wall is True:
             ninja_gravity = -2.7
             slide_channel.pause()
             if ninja_direction == 'r':
@@ -595,16 +595,16 @@ while run:
     left_cooldown = normalize(left_cooldown,1)
     if (win == 0) and (lose == 0):
         if right_cooldown == 0:
-            if right == True:
+            if right is True:
                 ninja_slide += 0.5
                 ninja_direction = 'r'
-                if air == True:
+                if air is True:
                     ninja_slide -= 0.125
         if left_cooldown == 0:
-            if left == True:
+            if left is True:
                 ninja_slide -= 0.5
                 ninja_direction = 'l'
-                if air == True:
+                if air is True:
                     ninja_slide += 0.125
 
     ninja_slide = normalize(ninja_slide,0.25)
@@ -628,26 +628,26 @@ while run:
 
     ninja_ground_timer += 1
     
-    if ninja_collisions['bottom'] == True:
+    if ninja_collisions['bottom'] is True:
         ninja_ground_timer = 0
         ninja_gravity = 0.75
     if ninja_ground_timer < 3:
         air = False
     if win != 0:
         ninja_img = ninja_eat
-    elif (ninja_collisions['right'] == True) and (ninja_ground_timer >= 3):
+    elif (ninja_collisions['right'] is True) and (ninja_ground_timer >= 3):
         ninja_gravity = maximum(ninja_gravity,1.5)
         ninja_img = ninja_wall
         wall = True
-        if right == True:
+        if right is True:
             ninja_slide = 0.875
-    elif (ninja_collisions['left'] == True) and (ninja_ground_timer >= 3):
+    elif (ninja_collisions['left'] is True) and (ninja_ground_timer >= 3):
         ninja_gravity = maximum(ninja_gravity,1.5)
         ninja_img = pygame.transform.flip(ninja_wall,True,False)
         wall = True
-        if left == True:
+        if left is True:
             ninja_slide = -0.875
-    elif air == True:
+    elif air is True:
         if ninja_direction == 'r':
             ninja_img = ninja_jump
         else:
@@ -664,12 +664,12 @@ while run:
             ninja_run.play(ninja_run_key,Display,False,True,[-4-scroll_x,-3-scroll_y],opacity)
         else:
             ninja_run.play(ninja_run_key,Display,True,True,[-4-scroll_x,-3-scroll_y],opacity)
-    if running == False:
+    if running is False:
         ninja_run.reset(ninja_run_key)
         ninja_img.set_alpha(opacity)
         Display.blit(ninja_img,(ninja.x-4-scroll_x,ninja.y-3-scroll_y))
     elif random.randint(1,5) == 1:
-        if tile_type != None:
+        if tile_type is not None:
             if (tile_type[:5] == 'grass') or (tile_type[:4] == 'dirt'):
                 random.choice([grass_0_sound,grass_1_sound]).play()
                 if ninja_direction == 'r':
@@ -678,7 +678,7 @@ while run:
                 else:
                     for i in range(4):
                         particles.append([ninja.x+8,ninja.y+14,(random.randint(0,20)-20)/20,(random.randint(10,25)-25)/10,random.choice([(51,120,115),(106,183,115)]),True,random.randint(10,20),1,'spark'])
-    if wall == False:
+    if wall is False:
         slide_channel.pause()
     elif ninja_gravity > 0:
         slide_channel.unpause()
@@ -687,13 +687,13 @@ while run:
     for bomb in bombs:
         obj = entities.PhysicsObject(bomb[0],bomb[1],3,3)
         collisions = obj.Move([bomb[2],bomb[3]],nearby_tiles(bomb[0],bomb[1],level))
-        if (collisions['left'] == True) or (collisions['right'] == True):
+        if (collisions['left'] is True) or (collisions['right'] is True):
             bomb[2] = -bomb[2]
             bounce_sound.play()
-        if collisions['bottom'] == True:
+        if collisions['bottom'] is True:
             bomb[3] = int(-bomb[3] * 0.3)
             bomb[2] = normalize(bomb[2],1)
-        if collisions['top'] == True:
+        if collisions['top'] is True:
             bomb[3] = -bomb[3]
             bounce_sound.play()
         bomb[0] = obj.x
@@ -717,7 +717,7 @@ while run:
 
     # Particles ---------------------------------------------- #
     for particle in particles:
-        if particle[5] == False:
+        if particle[5] is False:
             particle[0] += particle[2]
             particle[1] += particle[3]
         else:
@@ -750,8 +750,8 @@ while run:
         particle[6] -= 1
         if particle[6] < 0:
             particles.remove(particle)
-        elif particle[5] == True:
-            if collisions['bottom'] == True:
+        elif particle[5] is True:
+            if collisions['bottom'] is True:
                 particles.remove(particle)
 
     # Tiles -------------------------------------------------- #
@@ -782,7 +782,7 @@ while run:
             expressions.remove(expression)
 
     # Controller --------------------------------------------- #
-    if controller_mode == True:
+    if controller_mode is True:
         for button in range(len(InitialButtons)):
             InitialButtons[button] = 0
         for i in range(controllerbuttons):
@@ -796,13 +796,13 @@ while run:
         stick_tilt = joystick.get_axis(stick_axis_id)
 
         if stick_tilt > 0.7:
-            if right == False:
+            if right is False:
                 right = True
                 if ninja_direction == 'l':
                     left = False
                     particle_animations.append([turn_animation.start(ninja.x-4,ninja.y-1),turn_animation,True])
         elif stick_tilt < -0.7:
-            if left == False:
+            if left is False:
                 left = True
                 if ninja_direction == 'r':
                     right = False
@@ -821,7 +821,7 @@ while run:
                     poof_sound.play()
                     for item in items:
                         if item[0] == 'human.png':
-                            if item[4] == True:
+                            if item[4] is True:
                                 VOs[random.choice(['huh_1','huh_2','I_cant_see_him','umm','what','where_did_he_go'])].play()
                                 expressions.append(['confusion',item[1]+11,item[2],400])
                     for i in range(40):
@@ -867,7 +867,7 @@ while run:
                         poof_sound.play()
                         for item in items:
                             if item[0] == 'human.png':
-                                if item[4] == True:
+                                if item[4] is True:
                                     VOs[random.choice(['huh_1','huh_2','I_cant_see_him','umm','what','where_did_he_go'])].play()
                                     expressions.append(['confusion',item[1]+11,item[2],400])
                         for i in range(40):
