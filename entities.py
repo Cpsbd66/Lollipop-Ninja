@@ -154,7 +154,9 @@ def animation_sequence(sequence,base_path,colorkey=(255,255,255),transparency=25
 # if neither of those are present, then the animation deletes itself
 class animation(object):
 
-    def __init__(self,sequence,base_path,attributes=[],colorkey=(255,255,255),transparency=255):
+    def __init__(self,sequence,base_path,attributes=None,colorkey=(255,255,255),transparency=255):
+        if attributes is None:
+            attributes = []
         self.sequence = animation_sequence(sequence,base_path,colorkey,transparency)
         self.attributes = attributes
         self.key_num = 0
@@ -177,7 +179,9 @@ class animation(object):
         self.active_animations[self.key_num] = [x,y,0,None]
         return self.key_num # returns a key for the current animation, it's used to handle it
 
-    def play(self,key,surf,flip=False,show=True,offset=[0,0],transparency=255): # play both displays and handles the frame
+    def play(self,key,surf,flip=False,show=True,offset=None,transparency=255):
+        if offset is None:
+            offset = [0,0]
         global animation_database
         anim_read = self.active_animations[key]
         animation_database[self.sequence[anim_read[2]]].set_alpha(transparency)
