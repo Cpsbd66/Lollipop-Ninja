@@ -46,7 +46,7 @@ def Text2List(Text,Divider,intmode=False):
         if char != Divider:
             Current += char
         else:
-            if intmode == True:
+            if intmode is True:
                 try:
                     List.append(int(Current))
                 except:
@@ -75,13 +75,13 @@ def load_map():
 while True:
     # Background --------------------------------------------- #
     Display.fill(SKY)
-    if right == True:
+    if right is True:
         scroll_x += 4
-    if left == True:
+    if left is True:
         scroll_x -= 4
-    if up == True:
+    if up is True:
         scroll_y -= 4
-    if down == True:
+    if down is True:
         scroll_y += 4
     # Tiles -------------------------------------------------- #
     for tile in tile_map:
@@ -97,7 +97,7 @@ while True:
         if img != 'Thumbs.db':
             Display.blit(pygame.transform.scale(tile_database[img],(16,16)),(x*17,y*17-tile_scroll*17))
             TileR = pygame.Rect(x*17,y*17-tile_scroll*17,16,16)
-            if Click == True:
+            if Click is True:
                 if MouseR.colliderect(TileR):
                     current_tile = img
                     Clicking = False
@@ -112,18 +112,18 @@ while True:
     MouseR = pygame.Rect(MX,MY,2,2)
     MX = int(round((scroll_x+MX-10)/32,0))
     MY = int(round((scroll_y+MY-10)/32,0))
-    if current_tile != None:
+    if current_tile is not None:
         if current_tile[:5] != 'grass':
             Display.blit(tile_database[current_tile],(MX*32-scroll_x,MY*32-scroll_y))
         else:
             Display.blit(tile_database[current_tile],(MX*32-scroll_x,MY*32-5-scroll_y))
-        if Clicking == True:
+        if Clicking is True:
             loc = str(MX) + ';' + str(MY)
             if loc not in tile_map:
                 tile_map[loc] = [[current_tile],MX,MY]
             elif current_tile not in tile_map[loc][0]:
                 tile_map[loc][0].append(current_tile)
-        if Removing == True:
+        if Removing is True:
             loc = str(MX) + ';' + str(MY)
             if loc in tile_map:
                 del tile_map[loc]
@@ -174,7 +174,7 @@ while True:
             if event.button == 3:
                 Removing = False
     # Export ------------------------------------------------- #
-    if export == True:
+    if export is True:
         export = False
         export_str = ''
         for tile in tile_map:
